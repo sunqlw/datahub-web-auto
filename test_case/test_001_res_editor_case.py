@@ -198,7 +198,7 @@ class TestResEditorCase:
     # res_type_list = ['mysql', 'oracle', 'sqlserver', 'db2', 'postgresql', 'hana', 'tidb', 'dm', 'ftp', 'sftp', 's3',
     #                  'hdfs', 'hive', 'hive_ha', 'hbase']
 
-    res_type_list = ['mysql', 'oracle', 'sqlserver', 'db2']
+    res_type_list = ['mysql']
 
     # @pytest.mark.skip
     @pytest.mark.parametrize('res_type', res_type_list, ids=res_type_list)

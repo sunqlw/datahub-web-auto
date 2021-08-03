@@ -12,12 +12,12 @@ logger = logging.getLogger(__name__)
 class TestJobAddCase:
     page = JobEditorPage(driver=None)
     res_data_dict = {}
-    driver = webdriver.Chrome()
 
     @pytest.fixture(autouse=True, scope='class')  # 为什么加了这句话，就能拿到browser了
     def setup_class(self, browser):
         self.__class__.page = JobEditorPage(browser)
-        self.__class__.driver = browser
+        self.__class__.page.refresh_page()
+        self.__class__.page.job_manager_button.click()
         # self.__class__.res_data_dict = get_json_data(base_path + "/test_case/data/add_res_data.json")
 
     def test_add_rds_extract(self):

@@ -20,6 +20,7 @@ class TestResSearchCase:
     @pytest.fixture(autouse=True, scope='class')  # 为什么加了这句话，就能拿到browser了，
     def setup_class(self, browser):
         self.__class__.page = ResListPage(browser)
+        self.__class__.page.refresh_page()
         self.__class__.page.res_manager_button.click()
 
     # 按类型搜索通用方法
@@ -83,8 +84,10 @@ class TestResSearchCase:
         self.page.search_button.click()
         assert self.page.no_data_sign.text == '暂无数据'
 
-    res_type_list = ['mysql', 'oracle', 'sqlserver', 'db2', 'postgresql', 'hana', 'tidb', 'dm', 'ftp', 's3',
-                     'hdfs', 'hive', 'hbase']
+    # res_type_list = ['mysql', 'oracle', 'sqlserver', 'db2', 'postgresql', 'hana', 'tidb', 'dm', 'ftp', 's3',
+    #                  'hdfs', 'hive', 'hbase']
+
+    res_type_list = ['mysql']
 
     @pytest.mark.parametrize('res_type', res_type_list, ids=res_type_list)
     def test_search_by_res_type(self, res_type):

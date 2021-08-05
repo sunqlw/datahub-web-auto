@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/Users/sim-hank/Documents/datahub/datahub-web-auto/test_case/test_job_add_case.py", line 23, in test_add_rds_extract
+    self.page.add_new_canvas_button.click()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/poium/page_objects.py", line 234, in click
+    elem = self.__get_element(self.k, self.v)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/poium/page_objects.py", line 144, in __get_element
+    self.__find_element((By.CLASS_NAME, value))
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/poium/page_objects.py", line 129, in __find_element
+    raise NoSuchElementException(error_msg)
+selenium.common.exceptions.NoSuchElementException: Message: ❌ Find 0 elements through: class name=new-box
+
+

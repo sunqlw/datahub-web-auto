@@ -1,4 +1,3 @@
-import logging
 import os.path
 import time
 import pytest
@@ -7,10 +6,9 @@ from page import ResEditorPage
 from public.common import get_json_data, get_now_str
 from os.path import dirname, abspath
 from selenium.common import exceptions
+from public import logging
 
 sys.path.insert(0, dirname(dirname(abspath(__file__))))  # 这行代码在干啥？？
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
 base_path = dirname(dirname(abspath(__file__)))
 res_data_dict = get_json_data(base_path + "/test_case/data/add_res_data.json")
 message_data_dict = get_json_data(base_path + "/test_case/data/message.json")
@@ -53,6 +51,7 @@ class TestResEditorCase:
         self.page.connect_success_sign.timeout = 10
         self.page.connect_success_sign.is_displayed()
         self.page.save_button.click()
+        logging.info('点击测试连接并保存成功')
         # 等待成功的标志出现，如果测试连接失败标志出现了，则直接失败
         # 如何实现该功能？
         # for x in range(5):
@@ -100,24 +99,24 @@ class TestResEditorCase:
     def add_rds_common(self, **kwargs):
         if kwargs['type'] != 'mysql':
             self.page.res_type_select.click()
-        if kwargs['type'] == 'oracle':
-            self.page.res_type_oracle.click()
-            self.page.db_server_input = kwargs['server_name']
-        elif kwargs['type'] == 'sqlserver':
-            self.page.res_type_sqlserver.click()
-        elif kwargs['type'] == 'db2':
-            self.page.res_type_db2.click()
-            self.page.db_server_input = kwargs['server_name']
-        elif kwargs['type'] == 'postgresql':
-            self.page.res_type_postgresql.click()
-        elif kwargs['type'] == 'hana':
-            self.page.res_type_hana.click()
-        elif kwargs['type'] == 'tidb':
-            self.page.res_type_tidb.click()
-        elif kwargs['type'] == 'dm':
-            self.page.res_type_dm.click()
-        else:
-            print('抛出异常，所添加类型不符合要求')
+            if kwargs['type'] == 'oracle':
+                self.page.res_type_oracle.click()
+                self.page.db_server_input = kwargs['server_name']
+            elif kwargs['type'] == 'sqlserver':
+                self.page.res_type_sqlserver.click()
+            elif kwargs['type'] == 'db2':
+                self.page.res_type_db2.click()
+                self.page.db_server_input = kwargs['server_name']
+            elif kwargs['type'] == 'postgresql':
+                self.page.res_type_postgresql.click()
+            elif kwargs['type'] == 'hana':
+                self.page.res_type_hana.click()
+            elif kwargs['type'] == 'tidb':
+                self.page.res_type_tidb.click()
+            elif kwargs['type'] == 'dm':
+                self.page.res_type_dm.click()
+            else:
+                print('抛出异常，所添加类型不符合要求')
         self.page.db_host_input = kwargs['host']
         self.page.db_port_input = kwargs['port']
         self.page.db_username_input = kwargs['username']
@@ -193,7 +192,7 @@ class TestResEditorCase:
         self.page.toast_elem.is_displayed()
         assert self.page.toast_elem.text == message_data_dict['save_success']
         self.page.table_tr1_td1.is_displayed()
-        assert self.page.table_tr1_td1.text == res_name
+        assert self.page.table_tr1_td1.text == 'res_name'
 
     # res_type_list = ['mysql', 'oracle', 'sqlserver', 'db2', 'postgresql', 'hana', 'tidb', 'dm', 'ftp', 'sftp', 's3',
     #                  'hdfs', 'hive', 'hive_ha', 'hbase']

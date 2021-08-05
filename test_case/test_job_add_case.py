@@ -1,12 +1,10 @@
 import pytest
 import time
-import logging
-import pyautogui
+import traceback
 from page import JobEditorPage
-from selenium import webdriver
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+from selenium.common.exceptions import NoSuchElementException
+# from selenium import webdriver
+from public import logging
 
 
 class TestJobAddCase:
@@ -21,14 +19,17 @@ class TestJobAddCase:
         # self.__class__.res_data_dict = get_json_data(base_path + "/test_case/data/add_res_data.json")
 
     def test_add_rds_extract(self):
-        self.page.add_job_button.click()
-        self.page.add_new_canvas_button.click()
-        self.page.job_name_input = '新建空白画布任务'
-        self.page.add_sure_button.click()
-        self.page.drag_and_drop_by_offset_by_pyautogui(self.page.rds_extract_component, 380, 400)
-        self.page.focus(self.page.rds_load_component)
-        self.page.drag_and_drop_by_offset_by_pyautogui(self.page.rds_load_component, 600, 400)
-        time.sleep(1)
-        # self.page.canvas_rds_extract.double_click()
-        self.page.connect_elem(self.page.first_right, self.page.second_left)
-        time.sleep(1)
+        try:
+            self.page.add_job_button.click()
+            self.page.add_new_canvas_button.click()
+            self.page.job_name_input = '新建空白画布任务'
+            self.page.add_sure_button.click()
+            self.page.drag_and_drop_by_offset_by_pyautogui(self.page.rds_extract_component, 380, 400)
+            self.page.focus(self.page.rds_load_component)
+            self.page.drag_and_drop_by_offset_by_pyautogui(self.page.rds_load_component, 600, 400)
+            time.sleep(1)
+            self.page.connect_elem(self.page.first_right, self.page.second_left)
+            time.sleep(1)
+        except NoSuchElementException:
+            logging.error(traceback.format_exc())
+            logging.exception('没有找到元素')  # exception方法和error的区别就是exception会打印堆栈信息

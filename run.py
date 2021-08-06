@@ -1,5 +1,6 @@
 # coding=utf-8
 import os
+import shutil
 import time
 import logging
 import pytest
@@ -44,6 +45,8 @@ def run(m):
                      "--maxfail", RunConfig.max_fail,  # 设置最大失败数
                      "--reruns", RunConfig.rerun])  # 设置失败重跑次数
         logger.info("运行结束，生成测试报告♥❤！")
+        shutil.copyfile(html_report, os.path.join(REPORT_DIR, "report.html"))
+        shutil.copyfile(xml_report, os.path.join(REPORT_DIR, "junit-xml.xml"))
     elif m == "debug":
         print("debug模式，开始执行！")
         pytest.main(["-v", "-s", RunConfig.cases_path])

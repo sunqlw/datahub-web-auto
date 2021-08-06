@@ -51,7 +51,6 @@ class TestResEditorCase:
         self.page.connect_success_sign.timeout = 10
         self.page.connect_success_sign.is_displayed()
         self.page.save_button.click()
-        logging.info('点击测试连接并保存成功')
         # 等待成功的标志出现，如果测试连接失败标志出现了，则直接失败
         # 如何实现该功能？
         # for x in range(5):
@@ -192,12 +191,12 @@ class TestResEditorCase:
         self.page.toast_elem.is_displayed()
         assert self.page.toast_elem.text == message_data_dict['save_success']
         self.page.table_tr1_td1.is_displayed()
-        assert self.page.table_tr1_td1.text == 'res_name'
+        assert self.page.table_tr1_td1.text == res_name
 
-    # res_type_list = ['mysql', 'oracle', 'sqlserver', 'db2', 'postgresql', 'hana', 'tidb', 'dm', 'ftp', 'sftp', 's3',
-    #                  'hdfs', 'hive', 'hive_ha', 'hbase']
+    res_type_list = ['mysql', 'oracle', 'sqlserver', 'db2', 'postgresql', 'hana', 'tidb', 'dm', 'ftp', 'sftp', 's3',
+                     'hdfs', 'hive', 'hive_ha', 'hbase']
 
-    res_type_list = ['mysql']
+    # res_type_list = ['mysql']
 
     # @pytest.mark.skip
     @pytest.mark.parametrize('res_type', res_type_list, ids=res_type_list)

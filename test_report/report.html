@@ -429,9 +429,12 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>report.html</h1>
-    <p>Report generated on 02-Aug-2021 at 18:49:59 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <p>Report generated on 06-Aug-2021 at 09:38:36 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
     <h2>Environment</h2>
     <table id="environment">
+      <tr>
+        <td>JAVA_HOME</td>
+        <td>/Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home</td></tr>
       <tr>
         <td>Packages</td>
         <td>{"pluggy": "0.13.1", "py": "1.10.0", "pytest": "6.2.4"}</td></tr>
@@ -445,7 +448,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>Python</td>
         <td>3.9.6</td></tr></table>
     <h2>Summary</h2>
-    <p>4 tests ran in 70.66 seconds. </p>
+    <p>4 tests ran in 30.05 seconds. </p>
     <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">4 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>, <input checked="true" class="filter" data-test-result="rerun" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="rerun">0 rerun</span>
     <h2>Results</h2>
     <table id="results-table">
@@ -460,68 +463,68 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">test_case/test_001_res_editor_case.py::TestResEditorCase::test_add[mysql]</td>
+          <td class="col-name">test_case/test_002_res_search_case.py::TestResSearchCase::test_search_by_res_name</td>
           <td>
             <html>
               <head>
                 <meta name="Content-Type" value="text/html; charset=latin1"/></head>
               <body>
-                <p>        用例名称：添加资源</p>
-                <p>        步骤：1.填写完相关参数 2.点击测试连接，等待连接通过后点击保存按钮</p>
-                <p>        检查点：1.toast提示保存成功 2.表格第一列为新增的资源名</p>
+                <p>        用例名称：根据资源名搜索关键字不存在的资源</p>
+                <p>        步骤：1.输入一个不存在的关键字 2.点击搜索</p>
+                <p>        检查点：1.列表里面显示无数据</p>
                 <p>        </p></body></html></td>
-          <td class="col-duration">18.94</td></tr>
+          <td class="col-duration">9.06</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">test_case/test_001_res_editor_case.py::TestResEditorCase::test_add[oracle]</td>
+          <td class="col-name">test_case/test_002_res_search_case.py::TestResSearchCase::test_search_by_res_type[mysql]</td>
           <td>
             <html>
               <head>
                 <meta name="Content-Type" value="text/html; charset=latin1"/></head>
               <body>
-                <p>        用例名称：添加资源</p>
-                <p>        步骤：1.填写完相关参数 2.点击测试连接，等待连接通过后点击保存按钮</p>
-                <p>        检查点：1.toast提示保存成功 2.表格第一列为新增的资源名</p>
+                <p>        用例名称：根据资源类型搜索</p>
+                <p>        步骤：1.选择资源类型 2.点击搜索</p>
+                <p>        检查点：1.列表里的都是所搜索类型的资源</p>
                 <p>        </p></body></html></td>
-          <td class="col-duration">16.59</td></tr>
+          <td class="col-duration">6.18</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">test_case/test_001_res_editor_case.py::TestResEditorCase::test_add[sqlserver]</td>
+          <td class="col-name">test_case/test_002_res_search_case.py::TestResSearchCase::test_delete_res_cancel</td>
           <td>
             <html>
               <head>
                 <meta name="Content-Type" value="text/html; charset=latin1"/></head>
               <body>
-                <p>        用例名称：添加资源</p>
-                <p>        步骤：1.填写完相关参数 2.点击测试连接，等待连接通过后点击保存按钮</p>
-                <p>        检查点：1.toast提示保存成功 2.表格第一列为新增的资源名</p>
+                <p>        用例名称：取消删除资源验证</p>
+                <p>        步骤：1.点击第一行数据的删除按钮 2.弹窗后点击取消按钮</p>
+                <p>        检查点：1.弹窗消失 2.数据没有删除</p>
                 <p>        </p></body></html></td>
-          <td class="col-duration">15.41</td></tr>
+          <td class="col-duration">5.87</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">test_case/test_001_res_editor_case.py::TestResEditorCase::test_add[db2]</td>
+          <td class="col-name">test_case/test_002_res_search_case.py::TestResSearchCase::test_delete_res_sure</td>
           <td>
             <html>
               <head>
                 <meta name="Content-Type" value="text/html; charset=latin1"/></head>
               <body>
-                <p>        用例名称：添加资源</p>
-                <p>        步骤：1.填写完相关参数 2.点击测试连接，等待连接通过后点击保存按钮</p>
-                <p>        检查点：1.toast提示保存成功 2.表格第一列为新增的资源名</p>
+                <p>        用例名称：确定删除资源验证</p>
+                <p>        步骤：1.点击第一行数据的删除按钮 2.弹窗后点击确定按钮</p>
+                <p>        检查点：1.弹窗消失 2.toast弹窗提示删除成功 3.数据从列表中移除</p>
                 <p>        </p></body></html></td>
-          <td class="col-duration">0.00</td></tr>
+          <td class="col-duration">8.88</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody></table></body></html>

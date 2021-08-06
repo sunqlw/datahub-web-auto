@@ -7,9 +7,9 @@ class RunConfig:
     运行测试配置
     """
     # 运行测试用例的目录或文件
-    cases_path = os.path.join(PRO_PATH, "test_case")
+    # cases_path = os.path.join(PRO_PATH, "test_case")
     # cases_path = os.path.join(PRO_PATH, "test_case", "test_001_res_editor_case.py")
-    # cases_path = os.path.join(PRO_PATH, "test_case", "test_003_res_delete_case.py")
+    cases_path = os.path.join(PRO_PATH, "test_case", "test_002_res_search_case.py")
 
     # 配置浏览器驱动类型(chrome/firefox/chrome-headless/firefox-headless)。
     driver_type = "chrome"

@@ -1,15 +1,11 @@
-import logging
-import os.path
-import time
 import pytest
-import sys
 from page import ResListPage
-from public.common import get_json_data, get_now_str
+from public.common import get_json_data
 from os.path import dirname, abspath
-from selenium.common import exceptions
+from conftest import capture_screenshots
+from .data.constant_data import DB_TYPE_DICT
 
 base_path = dirname(dirname(abspath(__file__)))
-sign_data_dict = get_json_data(base_path + "/test_case/data/sign.json")
 message_data_dict = get_json_data(base_path + "/test_case/data/message.json")
 
 
@@ -72,7 +68,7 @@ class TestResSearchCase:
         if res_type:
             results = self.page.return_table_col(self.page.table_ele, 2)
             for y in range(len(results)):
-                assert sign_data_dict[res_type] == results[y]
+                assert DB_TYPE_DICT[res_type] == results[y]
 
     def test_search_by_res_name(self):
         """
@@ -89,6 +85,7 @@ class TestResSearchCase:
 
     res_type_list = ['mysql']
 
+    @pytest.mark.xfail(strict=True, resonse='标记为失败')
     @pytest.mark.parametrize('res_type', res_type_list, ids=res_type_list)
     def test_search_by_res_type(self, res_type):
         """
@@ -98,6 +95,7 @@ class TestResSearchCase:
         """
         self.search_by_res_type(res_type)
         self.check_search_result(res_type=res_type)
+        capture_screenshots('搜索mysql类型.png')
 
     def test_delete_res_cancel(self):
         """
@@ -108,7 +106,7 @@ class TestResSearchCase:
         self.page.table_tr1_td1.refresh_element()
         res_name_first = self.page.table_tr1_td1.text
         self.page.res_delete_button.click()
-        self.page.delete_cancel_button.click()
+        self.page.box_operate('cancel')
         self.page.wait_elem_not_visibility(self.page.box_text_ele)
         res_name_check = self.page.table_tr1_td1.text
         assert res_name_first == res_name_check
@@ -122,7 +120,7 @@ class TestResSearchCase:
         self.page.table_tr1_td1.refresh_element()
         res_name_first = self.page.table_tr1_td1.text
         self.page.res_delete_button.click()
-        self.page.delete_sure_button.click()
+        self.page.box_operate('sure')
         self.page.wait_elem_not_visibility(self.page.box_text_ele)
         self.page.toast_elem.is_displayed()
         assert self.page.toast_elem.text == '删除成功'

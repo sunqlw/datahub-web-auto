@@ -40,7 +40,5 @@ class ResListPage(MenuPage):
     search_button = Element(xpath='//div[@class="flexRow el-row"]/div[3]/button[1]', describe='搜索按钮')
     reset_button = Element(xpath='//div[@class="flexRow el-row"]/div[3]/button[2]', describe='重置按钮')
     res_delete_button = Element(xpath='//i[@title="删除"]', describe='资源删除按钮')
-    delete_cancel_button = Element(xpath='//div[@class="el-message-box__btns"]/button[1]', describe='删除资源取消按钮')
-    delete_sure_button = Element(xpath='//div[@class="el-message-box__btns"]/button[2]', describe='删除资源确认按钮')
     res_total_span = Element(class_name='el-pagination__total', describe='总条数标签')
 

@@ -1,6 +1,7 @@
 import os
 import pytest
 import time
+import allure
 from py.xml import html
 from selenium import webdriver
 from selenium.webdriver import Remote
@@ -55,12 +56,14 @@ def pytest_runtest_makereport(item):
                 case_name = case_path
             else:
                 case_name = case_path
+            # 判断测试用例执行失败时触发截图，其实截图本质上还是走的selenium的截图方法
             capture_screenshots(case_name)
-            img_path = "image/" + case_name.split("/")[-1]
-            if img_path:
-                html = '<div><img src="%s" alt="screenshot" style="width:304px;height:228px;" ' \
-                       'onclick="window.open(this.src)" align="right"/></div>' % img_path
-                extra.append(pytest_html.extras.html(html))
+            # 不忘报告里面添加截图，因为在jenkins和发了邮件也看不到截图
+            # img_path = "image/" + case_name.split("/")[-1]
+            # if img_path:
+            #     html = '<div><img src="%s" alt="screenshot" style="width:304px;height:228px;" ' \
+            #            'onclick="window.open(this.src)" align="right"/></div>' % img_path
+            #     extra.append(pytest_html.extras.html(html))
         report.extra = extra
 
 
@@ -103,7 +106,6 @@ def capture_screenshots(case_name):
         RunConfig.NEW_REPORT = os.path.join(REPORT_DIR, now_time)
         image_dir = os.path.join(RunConfig.NEW_REPORT, "image", file_name)
         RunConfig.driver.save_screenshot(image_dir)
-        # raise NameError('没有初始化测试报告目录')
     else:
         image_dir = os.path.join(RunConfig.NEW_REPORT, "image", file_name)
         RunConfig.driver.save_screenshot(image_dir)
@@ -173,6 +175,3 @@ def browser_close():
     driver.quit()
     print("所有用例执行完成")
 
-
-# if __name__ == "__main__":
-#     capture_screenshots("test_dir/test_baidu_search.test_search_python.png")

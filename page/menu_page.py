@@ -19,7 +19,31 @@ class MenuPage(Page):
     table_ele = Element(tag='tbody', describe='表格通用对象')
     table_tr1_td1 = Element(xpath='//tbody/tr[1]/td[1]/div', describe='表格第一行第一列')
     box_text_ele = Element(xpath='//div[@class="el-message-box__message"]/p', describe='弹窗内容')
+    box_cancel_button = Element(xpath='//div[@class="el-message-box__btns"]/button[1]', describe='弹窗取消按钮')
+    box_sure_button = Element(xpath='//div[@class="el-message-box__btns"]/button[2]', describe='弹窗确定按钮')
+    box_close_button = Element(xpath='//div[@class="el-message-box__header"]/button[1]', describe='弹窗右上角×按钮')
     no_data_sign = Element(xpath='//div[@class="empty-content"]/p', describe='暂无数据标识')
+
+    # 弹窗操作通用方法
+    def box_operate(self, confirm):
+        if confirm == 'sure':
+            self.box_sure_button.click()
+        elif confirm == 'cancel':
+            self.box_cancel_button.click()
+        else:
+            self.box_close_button.click()
+
+    # 比较浮窗内容通用方法
+    def compare_toast(self, content):
+        self.toast_elem.is_displayed()
+        return self.toast_elem.text == content
+
+    @staticmethod
+    def find_elem_by_attribute(attribute, value):
+        """
+        根据属性和值寻找元素并返回元素
+        """
+        return Element(xpath='//*[@'+attribute+'="'+value+'"]')
 
     # 定义自己的方法，根据pyautogui采用绝对坐标来拖拽元素
     def drag_and_drop_by_offset_by_pyautogui(self, elem, x, y):
@@ -32,7 +56,6 @@ class MenuPage(Page):
     # 定位元素
     def focus(self, elem):
         self.driver.execute_script("arguments[0].scrollIntoView();", self.switch_elem(elem))
-        # self.driver.execute_script("arguments[0].focus();", self.switch_elem(elem))
 
     # 刷新页面
     def refresh_page(self):

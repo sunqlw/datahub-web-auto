@@ -2,11 +2,11 @@ from poium import Element
 from .extract_component_page import ExtractComponentPage
 from .load_component_page import LoadComponentPage
 from .transform_component_page import TransformComponentPage
+from .analyse_excel_page import AnalyseExcelPage
+from .analyse_csv_page import AnalyseCsvPage
 
 
-class JobEditorPage(ExtractComponentPage, LoadComponentPage, TransformComponentPage):
-
-
+class JobEditorPage(ExtractComponentPage, LoadComponentPage, TransformComponentPage, AnalyseExcelPage, AnalyseCsvPage):
     add_job_button = Element(xpath='//button[@type="button"]', describe='新建任务按钮', index=2)
     add_new_canvas_button = Element(class_name='new-box', describe='新建空白画布按钮')
     job_name_input = Element(xpath='//input[@placeholder="请输入任务名"]', describe='任务名输入框')
@@ -19,6 +19,9 @@ class JobEditorPage(ExtractComponentPage, LoadComponentPage, TransformComponentP
     job_save_button = Element(xpath='//div[@class="tool-bar flexSpaceBetween"]/div[1]/div[2]', describe='任务保存按钮')
     clear_button = Element(xpath='//div[@class="tool-bar flexSpaceBetween"]/div[1]/div[3]', describe='清空画布按钮')
     run_record_button = Element(xpath='//div[@class="tool-bar flexSpaceBetween"]/div[1]/div[4]', describe='运行记录按钮')
+    basic_conf_button = Element(id_='tab-first', describe='抽取配置/加载配置按钮')
+    data_conf_button = Element(id_='tab-second', describe='数据配置按钮')
+    file_button = Element(class_name='isActive', describe='添加文件/获取文件按钮')
     res_select = Element(xpath='//input[@placeholder="请选择资源连接"]', describe='组件资源连接下拉框')
     first_res = Element(xpath='/html/body/div[last()]/div[1]/div[1]/ul/li[1]', describe='资源连接下拉框中第一个资源')
     db_select = Element(xpath='//input[@placeholder="请选择数据库"]', describe='数据库下拉框')

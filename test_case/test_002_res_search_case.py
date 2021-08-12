@@ -3,7 +3,7 @@ from page import ResListPage
 from public.common import get_json_data
 from os.path import dirname, abspath
 from conftest import capture_screenshots
-from .data.constant_data import DB_TYPE_DICT
+from .data.constant_data import RES_TYPE_DICT
 
 base_path = dirname(dirname(abspath(__file__)))
 message_data_dict = get_json_data(base_path + "/test_case/data/message.json")
@@ -68,7 +68,7 @@ class TestResSearchCase:
         if res_type:
             results = self.page.return_table_col(self.page.table_ele, 2)
             for y in range(len(results)):
-                assert DB_TYPE_DICT[res_type] == results[y]
+                assert RES_TYPE_DICT[res_type] == results[y]
 
     def test_search_by_res_name(self):
         """

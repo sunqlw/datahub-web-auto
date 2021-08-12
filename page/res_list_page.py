@@ -37,8 +37,6 @@ class ResListPage(MenuPage):
                                   describe='搜索类型二级菜单ftp')
     res_type_search_aws_s3 = Element(xpath='//div[@class="el-cascader-panel"]/div[2]/div[1]/ul/li[2]',
                                      describe='搜索类型二级菜单aws s3')
-    search_button = Element(xpath='//div[@class="flexRow el-row"]/div[3]/button[1]', describe='搜索按钮')
-    reset_button = Element(xpath='//div[@class="flexRow el-row"]/div[3]/button[2]', describe='重置按钮')
     res_delete_button = Element(xpath='//i[@title="删除"]', describe='资源删除按钮')
     res_total_span = Element(class_name='el-pagination__total', describe='总条数标签')
 

@@ -7,11 +7,11 @@ from public.common import get_json_data, get_now_str
 from os.path import dirname, abspath
 from selenium.common import exceptions
 from public import logging
+from .data.constant_data import MESSAGE_DICT
+from .data.res_data import RES_DATA_DICT
 
 sys.path.insert(0, dirname(dirname(abspath(__file__))))  # 这行代码在干啥？？
 base_path = dirname(dirname(abspath(__file__)))
-res_data_dict = get_json_data(base_path + "/test_case/data/add_res_data.json")
-message_data_dict = get_json_data(base_path + "/test_case/data/message.json")
 
 
 # 添加资源前点击新建资源按钮并填写资源名和填写完参数后点击测试连接和保存按钮
@@ -48,23 +48,12 @@ class TestResEditorCase:
     def connect_success_and_save(self):
         self.page.connect_button.click()
         # 在这里应该增加判断，如果出现了测试连接失败，则应该直接抛出异常了
-        self.page.connect_success_sign.timeout = 10
-        self.page.connect_success_sign.is_displayed()
+        self.page.connect_finish_sign.timeout = 10
+        self.page.connect_finish_sign.is_displayed()
+        # 如果是测试连接失败，则直接判定为失败
+        if 'close' in self.page.connect_finish_sign.get_attribute('class'):
+            assert False
         self.page.save_button.click()
-        # 等待成功的标志出现，如果测试连接失败标志出现了，则直接失败
-        # 如何实现该功能？
-        # for x in range(5):
-        #     try:
-        #         self.page.connect_success_sign.is_displayed()
-        #         self.page.save_button.click()
-        #         break
-        #     except exceptions.NoSuchElementException:
-        #         try:
-        #             self.page.connect_fail_box.is_displayed()
-        #             assert False
-        #             # break
-        #         except exceptions.NoSuchElementException:
-        #             time.sleep(1)
 
     # 根据zk串输入zk地址通用方法
     def input_zk_host(self, zk_str):
@@ -189,7 +178,7 @@ class TestResEditorCase:
     # 判断资源是否添加成功
     def check_add_success(self, res_name):
         self.page.toast_elem.is_displayed()
-        assert self.page.toast_elem.text == message_data_dict['save_success']
+        assert self.page.toast_elem.text == MESSAGE_DICT['save_success']
         self.page.table_tr1_td1.is_displayed()
         assert self.page.table_tr1_td1.text == res_name
 
@@ -206,7 +195,7 @@ class TestResEditorCase:
         步骤：1.填写完相关参数 2.点击测试连接，等待连接通过后点击保存按钮
         检查点：1.toast提示保存成功 2.表格第一列为新增的资源名
         """
-        params = res_data_dict[res_type]
+        params = RES_DATA_DICT[res_type]
         params['res_name'] = res_type + get_now_str()
         if 'ftp' in res_type:
             self.add_ftp_common(**params)
@@ -229,11 +218,11 @@ class TestResEditorCase:
         步骤：1.资源连接名填写一个已存在的名字，填写完相关参数 2.点击测试连接，等待连接通过后点击保存按钮
         检查点：1.保存失败，弹窗提示资源名已存在
         """
-        params = res_data_dict['mysql']
+        params = RES_DATA_DICT['mysql']
         self.page.table_tr1_td1.refresh_element()
         params['res_name'] = self.page.table_tr1_td1.text
         self.add_rds_common(**params)
-        assert self.page.box_text_ele.text == message_data_dict['res_name_exist']
+        assert self.page.box_text_ele.text == MESSAGE_DICT['res_name_exist']
 
     @pytest.mark.skip
     def test_add_oracle(self, browser):
@@ -244,22 +233,9 @@ class TestResEditorCase:
         2.点击测试连接，等待连接通过后点击保存按钮
         检查点：
         """
-        params = res_data_dict['oracle']
+        params = RES_DATA_DICT['oracle']
         params['res_name'] = 'oracle-ui-' + get_now_str()
         self.add_rds_common(**params)
         self.check_add_success(params['res_name'])
 
-    @pytest.mark.skip
-    def test_add_sqlserver(self, browser):
-        """
-        用例名称：添加sqlserver资源
-        步骤：
-        1.资源类型选择sqlserver，填写完相关参数
-        2.点击测试连接，等待连接通过后点击保存按钮
-        检查点：
-        """
-        params = res_data_dict['sqlserver']
-        params['res_name'] = 'sqlserver-ui-' + get_now_str()
-        self.add_rds_common(**params)
-        self.check_add_success(params['res_name'])
 

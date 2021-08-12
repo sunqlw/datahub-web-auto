@@ -1,13 +1,15 @@
 import time
 from page import JobEditorPage
-from ..data.constant_data import MESSAGE_DICT, COMPONENT_NAME_DICT
+from ..data.constant_data import MESSAGE_DICT, COMP_DICT
 
 position_dict = {
-    COMPONENT_NAME_DICT['rds_exct']: (380, 400),
-    COMPONENT_NAME_DICT['local_exct']: (380, 400),
-    COMPONENT_NAME_DICT['excel']: (550, 400),
-    COMPONENT_NAME_DICT['rds_load']: (800, 400),
-    COMPONENT_NAME_DICT['hive_load']: (800, 400)
+    COMP_DICT['rds_exct']: (380, 400),
+    COMP_DICT['local_exct']: (380, 400),
+    COMP_DICT['excel']: (550, 400),
+    COMP_DICT['csv']: (550, 400),
+    COMP_DICT['rds_load']: (800, 400),
+    COMP_DICT['hive_load']: (800, 400),
+    COMP_DICT['hdfs_load']: (800, 400)
 }
 
 
@@ -36,9 +38,8 @@ class JobAddOperate(object):
     def drag_comp(self, *comp_name_list):
         for comp_name in comp_name_list:
             elem = self.page.menu_comp_elem(comp_name)
-            if comp_name in [COMPONENT_NAME_DICT['excel'], COMPONENT_NAME_DICT['hbase_load'],
-                             COMPONENT_NAME_DICT['hive_load'], COMPONENT_NAME_DICT['hdfs_load'],
-                             COMPONENT_NAME_DICT['rds_load']]:
+            if comp_name in [COMP_DICT['excel'], COMP_DICT['csv'], COMP_DICT['table_join'], COMP_DICT['hbase_load'],
+                             COMP_DICT['hive_load'], COMP_DICT['hdfs_load'], COMP_DICT['rds_load']]:
                 self.page.focus(elem)
             self.page.drag_and_drop_by_offset_by_pyautogui(elem, *position_dict[comp_name])
 
@@ -65,19 +66,31 @@ class JobAddOperate(object):
         elif op == 'delete':
             self.page.comp_delete_elem(comp_name).click()
             self.page.box_sure_button.click()
+        elif op == 'switch':
+            if 'is-active' in self.page.basic_conf_button.get_attribute('class'):
+                self.page.data_conf_button.click()
+            else:
+                self.page.basic_conf_button.click()
         else:
             raise Exception('操作类型只能为sure、cancel、close')
 
-    # 选择资源链接和数据库，资源类型只有为非mysql的数据库类型才需要传值
-    def select_res_and_db(self, db_name, res_type=None, res_name=''):
-        if res_type:
-            self.page.rds_type_select.click()
-            self.page.db_type_elem(res_type).click()
+    # 选择资源连接
+    def select_res(self, res_name=''):
         self.page.res_select.click()
         if res_name:
             self.page.res_select = res_name
         self.page.first_res.click()
-        self.page.db_select.click()
+
+    # 选择资源链接和数据库，资源类型只有为非mysql的数据库类型才需要传值
+    def select_res_and_db(self, db_name, res_type=None, res_name=''):
+        if res_type and res_type != 'HBase':
+            self.page.rds_type_select.click()
+            self.page.db_type_elem(res_type).click()
+        self.select_res(res_name)
+        if res_type == 'HBase':
+            self.page.space_select.click()
+        else:
+            self.page.db_select.click()
         db_elem = self.page.db_elem(db_name)
         self.page.focus(db_elem)
         db_elem.click()

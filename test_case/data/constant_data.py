@@ -1,4 +1,4 @@
-COMPONENT_NAME_DICT = {
+COMP_DICT = {
     'rds_exct': 'RDS抽取',
     'hdfs_exct': 'HDFS文件抽取',
     'ftp_exct': 'FTP文件抽取',
@@ -22,7 +22,7 @@ COMPONENT_NAME_DICT = {
     'hdfs_load': 'HDFS加载',
     'rds_load': 'RDS加载',
 }
-DB_TYPE_DICT = {
+RES_TYPE_DICT = {
     "mysql": "MySQL",
     "oracle": "Oracle",
     "sqlserver": "SQL Server",

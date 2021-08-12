@@ -70,6 +70,8 @@ class ResEditorPage(MenuPage):
     s3_region_china = Element(xpath='/html/body/div[last()]/div/div/ul/li[last()]', describe='s3 region 中国北部')
     max_connects_input = Element(xpath='//input[@placeholder="最大连接数最多为200"]', describe='最大连接数输入框')
     connect_button = Element(xpath='//*[@id="pane-baseInfoTab"]/div[2]/div[1]/button', describe='测试连接按钮')
+    connect_finish_sign = Element(xpath='//*[@id="pane-baseInfoTab"]/div[2]/div[1]/button/following-sibling::i',
+                                  describe='测试连接完成标识')
     save_button = Element(xpath='//div[@class="btns"]/button[2]', describe='保存按钮')
     connect_success_sign = Element(class_name='el-icon-circle-check', describe='测试连接通过标志')
     connect_fail_sign = Element(class_name='el-icon-circle-close', describe='测试连接失败标志')

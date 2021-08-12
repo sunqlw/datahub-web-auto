@@ -12,12 +12,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 class MenuPage(Page):
     res_type_list = ['mysql', 'oracle', 'sqlserver', 'db2', 'postgresql', 'hana', 'tidb', 'dm', 'ftp', 'sftp', 's3',
                      'hdfs', 'hive', 'hive_ha', 'hbase']
-
     job_manager_button = Element(xpath='//ul[@class="main-nav"]/li[1]/div', describe='任务管理按钮')
     res_manager_button = Element(xpath='//ul[@class="main-nav"]/li[2]/div', describe='资源管理按钮')
-    job_record_button = Element(id_='tab-taskRecord', describe='任务记录按钮')
-    timer_button = Element(id_='tab-timeSet', describe='定时器按钮')
-    run_record_button = Element(id_='tab-runRecord', describe='运行记录按钮')
     toast_elem = Element(xpath='/html/body/div[last()]/p', describe='toast标签')
     table_ele = Element(tag='tbody', describe='表格通用对象')
     table_tr1_td1 = Element(xpath='//tbody/tr[1]/td[1]/div', describe='表格第一行第一列')
@@ -28,9 +24,6 @@ class MenuPage(Page):
     no_data_sign = Element(xpath='//div[@class="empty-content"]/p', describe='暂无数据标识')
     search_button = Element(xpath='//span[contains(text(),"搜索")]/..', describe='搜索按钮')
     reset_button = Element(xpath='//span[contains(text(),"重置")]/..', describe='重置按钮')
-    creator_search_input = Element(xpath='//input[@placeholder="请输入创建人"]', describe='创建人输入框')
-    job_name_search_input = Element(xpath='//input[@placeholder="请输入任务名"]', describe='任务名输入框')
-    job_id_search_input = Element(xpath='//input[@placeholder="请输入任务ID"]', describe='任务ID输入框')
 
     # 弹窗操作通用方法
     def box_operate(self, confirm):

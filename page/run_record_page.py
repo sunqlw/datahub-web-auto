@@ -1,6 +1,6 @@
 from poium import Element
-from .menu_page import MenuPage
+from .job_manager_page import JobManagerPage
 
 
-class RunRecordPage(MenuPage):
-    status_select = Element(xpath='//input[@placeholder="请选择状态"]', describe='状态下拉框')
+class RunRecordPage(JobManagerPage):
+    run_detail_button = Element(class_name='leapicon-detail', describe='运行详情按钮')

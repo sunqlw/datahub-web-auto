@@ -1,3 +1,1 @@
-res = None
-if res == "hbase":
-    print('hh')
+print('123' > '12')

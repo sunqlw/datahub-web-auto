@@ -66,23 +66,23 @@ class MenuPage(Page):
     def wait_elem_not_visibility(self, elem, timeout=10):
         WebDriverWait(self.driver, timeout).until_not(ec.visibility_of(self.switch_elem(elem)), '元素未消失')
 
-    def return_table_line(self, table_ele, line_no):
+    def return_table_line(self, table_ele=table_ele, line_no=1):
         """
         返回表格某一行的所有内容
         :param table_ele: 表格对象
         :param line_no: 行号，从1开始
         :return: 表格内容的list对象
         """
-        return self.__return_table_content(table_ele, line_no=line_no)
+        return self.__return_table_content(table_ele, line_no=int(line_no))
 
-    def return_table_col(self, table_ele, col_no):
+    def return_table_col(self, table_ele=table_ele, col_no=1):
         """
         返回表格某一列的所有内容
         :param table_ele: 表格对象
         :param col_no: 列号，从1开始
         :return: 表格内容的list对象
         """
-        return self.__return_table_content(table_ele, col_no=col_no)
+        return self.__return_table_content(table_ele, col_no=int(col_no))
 
     def __return_table_content(self, table_ele, line_no=None, col_no=None):
         """
@@ -92,9 +92,12 @@ class MenuPage(Page):
         :param table_ele: 表格元素
         :return: 表格内容的list对象
         """
+        self.table_ele.refresh_element()
         ele = self.switch_elem(table_ele)
         tr_elems = ele.find_elements_by_tag_name('tr')
         list_str = []
+        if len(tr_elems) == 0:
+            return list_str
         if line_no:
             line_ele = tr_elems[line_no-1]
             td_elems = line_ele.find_elements_by_tag_name('td')

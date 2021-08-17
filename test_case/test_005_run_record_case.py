@@ -28,12 +28,13 @@ class TestRunRecordCase:
         self.op_jm.search_by_conditions(start_time=(str(date.today()+timedelta(days=-1))+' 00:00:00', str(date.today())+' 00:00:00'))
         self.check_search_success('start_time', '123')
 
-    condition_list = [('creator', 'adminaa'), ('job_name', 'mysql'), ('status', '运行中'), ('status', '失败'),
+    condition_list = [('creator', 'admin'), ('job_name', 'mysql'), ('status', '运行中'), ('status', '失败'),
                       ('status', '成功'), ('job_id', '35')]
     # condition_list = [('creator', 'admin')]
 
     @pytest.mark.parametrize('condition,value', condition_list)
     def test_search(self, condition, value):
+        self.op_jm.search_by_conditions(operate='reset')
         if condition == 'creator':
             self.op_jm.search_by_conditions(creator=value)
         if condition == 'job_name':
@@ -43,3 +44,13 @@ class TestRunRecordCase:
         if condition == 'job_id':
             self.op_jm.search_by_conditions(job_id=value)
         self.check_search_success(condition, value)
+
+    def test_comb_search(self):
+        """
+        用例名称：运行记录组合搜索
+        """
+        status = '成功'
+        job_name = 'mysql'
+        self.op_jm.search_by_conditions(status=status, job_name=job_name)
+        self.check_search_success('status', status)
+        self.check_search_success('job_name', job_name)

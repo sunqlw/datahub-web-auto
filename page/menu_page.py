@@ -1,4 +1,5 @@
 import time
+import timeit
 
 import pyautogui
 import platform
@@ -7,6 +8,8 @@ from poium import Page, Element
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
+
+from poium.common import logging
 
 
 class MenuPage(Page):
@@ -92,12 +95,13 @@ class MenuPage(Page):
         :param table_ele: 表格元素
         :return: 表格内容的list对象
         """
+        start = timeit.default_timer()
         self.table_ele.refresh_element()
         ele = self.switch_elem(table_ele)
         tr_elems = ele.find_elements_by_tag_name('tr')
         list_str = []
-        if len(tr_elems) == 0:
-            return list_str
+        # if len(tr_elems) == 0:
+        #     return list_str
         if line_no:
             line_ele = tr_elems[line_no-1]
             td_elems = line_ele.find_elements_by_tag_name('td')
@@ -109,6 +113,8 @@ class MenuPage(Page):
                 list_str.append(td_elems[col_no-1].find_element_by_tag_name('div').text)
         else:
             print("抛出异常，参数传递有误")
+        end = timeit.default_timer()
+        logging.info('运行时长：%s' % (end-start))
         return list_str
 
     def connect_elem(self, source_elem, target_elem):

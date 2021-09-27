@@ -15,7 +15,7 @@ class RunConfig:
     driver_type = "chrome"
 
     # 配置运行的 URL
-    url = "http://demo14.test.com:4018/datahub"
+    url = "http://demo10.test.com:4018/datahub"
     # url = "http://demo311.test.com:8070/datahub"
 
     # 登录用户名

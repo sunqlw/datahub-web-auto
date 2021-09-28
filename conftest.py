@@ -36,6 +36,17 @@ def pytest_html_results_table_row(report, cells):
     cells.pop()
 
 
+def pytest_collection_modifyitems(items):
+    """
+    测试用例收集完成时，将收集到的item的name和nodeid的中文显示在控制台上
+    解决控制台用例名称中文乱码问题
+    :return:
+    """
+    for item in items:
+        item.name = item.name.encode("utf-8").decode("unicode_escape")
+        item._nodeid = item.nodeid.encode("utf-8").decode("unicode_escape")
+
+
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
     """
@@ -59,11 +70,11 @@ def pytest_runtest_makereport(item):
             # 判断测试用例执行失败时触发截图，其实截图本质上还是走的selenium的截图方法
             capture_screenshots(case_name)
             # 不忘报告里面添加截图，因为在jenkins和发了邮件也看不到截图
-            # img_path = "image/" + case_name.split("/")[-1]
-            # if img_path:
-            #     html = '<div><img src="%s" alt="screenshot" style="width:304px;height:228px;" ' \
-            #            'onclick="window.open(this.src)" align="right"/></div>' % img_path
-            #     extra.append(pytest_html.extras.html(html))
+            img_path = "image/" + case_name.split("/")[-1]
+            if img_path:
+                html = '<div><img src="%s" alt="screenshot" style="width:304px;height:228px;" ' \
+                       'onclick="window.open(this.src)" align="right"/></div>' % img_path
+                extra.append(pytest_html.extras.html(html))
         report.extra = extra
 
 
@@ -170,8 +181,8 @@ def browser():
 # 关闭浏览器
 @pytest.fixture(scope="session", autouse=True)
 def browser_close():
+    # yield # 在fixture标记的固件中使用通过使用yield来表示执行teardown操作，所以此处表示此次会话结束前执行
     yield driver  # 在fixture标记的固件中使用通过使用yield来表示执行teardown操作，所以此处表示此次会话结束前执行
-    sleep(1)
     driver.quit()
     print("所有用例执行完成")
 

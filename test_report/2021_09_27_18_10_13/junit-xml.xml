@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="2" failures="0" skipped="0" tests="2" time="26.205" timestamp="2021-09-27T18:12:36.587135" hostname="sim-hankdeMacBook-Pro.local"><testcase classname="pytest" name="internal" time="0.000"><error message="internal error">def worker_internal_error(self, node, formatted_error):
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="2" failures="0" skipped="0" tests="2" time="26.350" timestamp="2021-09-27T18:10:14.142677" hostname="sim-hankdeMacBook-Pro.local"><testcase classname="pytest" name="internal" time="0.000"><error message="internal error">def worker_internal_error(self, node, formatted_error):
         """
         pytest_internalerror() was called on the worker.
     

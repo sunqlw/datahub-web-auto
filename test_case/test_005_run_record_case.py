@@ -30,9 +30,8 @@ class TestRunRecordCase:
 
     condition_list = [('creator', 'admin'), ('job_name', 'mysql'), ('status', '运行中'), ('status', '失败'),
                       ('status', '成功'), ('job_id', '35')]
-    # condition_list = [('creator', 'admin')]
 
-    @pytest.mark.parametrize('condition,value', condition_list)
+    @pytest.mark.parametrize('condition,value', condition_list, ids=[x[0] for x in condition_list])
     def test_search(self, condition, value):
         self.op_jm.search_by_conditions(operate='reset')
         if condition == 'creator':

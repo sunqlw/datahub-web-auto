@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="2" failures="0" skipped="0" tests="2" time="26.205" timestamp="2021-09-27T18:12:36.587135" hostname="sim-hankdeMacBook-Pro.local"><testcase classname="pytest" name="internal" time="0.000"><error message="internal error">def worker_internal_error(self, node, formatted_error):
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="2" failures="0" skipped="0" tests="2" time="31.938" timestamp="2021-09-27T18:09:19.044858" hostname="sim-hankdeMacBook-Pro.local"><testcase classname="pytest" name="internal" time="0.000"><error message="internal error">def worker_internal_error(self, node, formatted_error):
         """
         pytest_internalerror() was called on the worker.
     
@@ -10,13 +10,6 @@
         try:
 &gt;           assert False, formatted_error
 E           AssertionError: Traceback (most recent call last):
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 1400, in _save
-E                 dispatch = self._dispatch[tp]
-E             KeyError: &lt;class 'py._xmlgen.html'&gt;
-E             
-E             During handling of the above exception, another exception occurred:
-E             
-E             Traceback (most recent call last):
 E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/_pytest/main.py", line 269, in wrap_session
 E                 session.exitstatus = doit(config, session) or 0
 E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/_pytest/main.py", line 323, in _main
@@ -49,49 +42,38 @@ E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/pyth
 E                 raise ex[1].with_traceback(ex[2])
 E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pluggy/callers.py", line 187, in _multicall
 E                 res = hook_impl.function(*args)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pytest_rerunfailures.py", line 337, in pytest_runtest_protocol
-E                 item.ihook.pytest_runtest_logreport(report=report)
+E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pytest_rerunfailures.py", line 331, in pytest_runtest_protocol
+E                 reports = runtestprotocol(item, nextitem=nextitem, log=False)
+E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/_pytest/runner.py", line 120, in runtestprotocol
+E                 rep = call_and_report(item, "setup", log)
+E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/_pytest/runner.py", line 217, in call_and_report
+E                 report: TestReport = hook.pytest_runtest_makereport(item=item, call=call)
 E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pluggy/hooks.py", line 286, in __call__
 E                 return self._hookexec(self, self.get_hookimpls(), kwargs)
 E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pluggy/manager.py", line 93, in _hookexec
 E                 return self._inner_hookexec(hook, methods, kwargs)
 E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pluggy/manager.py", line 84, in &lt;lambda&gt;
 E                 self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pluggy/callers.py", line 208, in _multicall
-E                 return outcome.get_result()
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pluggy/callers.py", line 80, in get_result
-E                 raise ex[1].with_traceback(ex[2])
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pluggy/callers.py", line 187, in _multicall
-E                 res = hook_impl.function(*args)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/xdist/remote.py", line 141, in pytest_runtest_logreport
-E                 self.sendevent("testreport", data=data)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/xdist/remote.py", line 48, in sendevent
-E                 self.channel.send((name, kwargs))
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 729, in send
-E                 self.gateway._send(Message.CHANNEL_DATA, self.id, dumps_internal(item))
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 1371, in dumps_internal
-E                 return _Serializer().save(obj)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 1389, in save
-E                 self._save(obj)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 1407, in _save
-E                 dispatch(self, obj)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 1494, in save_tuple
-E                 self._save(item)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 1407, in _save
-E                 dispatch(self, obj)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 1490, in save_dict
-E                 self._write_setitem(key, value)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 1484, in _write_setitem
-E                 self._save(value)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 1407, in _save
-E                 dispatch(self, obj)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 1490, in save_dict
-E                 self._write_setitem(key, value)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 1484, in _write_setitem
-E                 self._save(value)
-E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/execnet/gateway_base.py", line 1405, in _save
-E                 raise DumpError("can't serialize {}".format(tp))
-E             execnet.gateway_base.DumpError: can't serialize &lt;class 'py._xmlgen.html'&gt;
+E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pluggy/callers.py", line 203, in _multicall
+E                 gen.send(outcome)
+E               File "/Users/sim-hank/Documents/web_auto/datahub-web-auto/conftest.py", line 71, in pytest_runtest_makereport
+E                 capture_screenshots(case_name)
+E               File "/Users/sim-hank/Documents/web_auto/datahub-web-auto/conftest.py", line 119, in capture_screenshots
+E                 RunConfig.driver.save_screenshot(image_dir)
+E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 1055, in save_screenshot
+E                 return self.get_screenshot_as_file(filename)
+E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 1032, in get_screenshot_as_file
+E                 png = self.get_screenshot_as_png()
+E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 1064, in get_screenshot_as_png
+E                 return base64.b64decode(self.get_screenshot_as_base64().encode('ascii'))
+E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 1074, in get_screenshot_as_base64
+E                 return self.execute(Command.SCREENSHOT)['value']
+E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+E                 self.error_handler.check_response(response)
+E               File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+E                 raise exception_class(message, screen, stacktrace)
+E             selenium.common.exceptions.NoSuchWindowException: Message: no such window: window was already closed
+E               (Session info: chrome=94.0.4606.61)
 E           assert False
 
 /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/xdist/dsession.py:187: AssertionError</error><error message="internal error">Traceback (most recent call last):
@@ -117,5 +99,5 @@ E           assert False
     call(**kwargs)
   File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/xdist/dsession.py", line 174, in worker_workerfinished
     assert not crashitem, (crashitem, node)
-AssertionError: ('test_case/test_001_res_editor_case.py::TestResEditorCase::test_add[mysql]', &lt;WorkerController gw0&gt;)
-assert not 'test_case/test_001_res_editor_case.py::TestResEditorCase::test_add[mysql]'</error></testcase></testsuite></testsuites>
+AssertionError: ('test_case/test_001_res_editor_case.py::TestResEditorCase::test_add[oracle]', &lt;WorkerController gw1&gt;)
+assert not 'test_case/test_001_res_editor_case.py::TestResEditorCase::test_add[oracle]'</error></testcase></testsuite></testsuites>

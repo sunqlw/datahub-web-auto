@@ -8,14 +8,14 @@ class RunConfig:
     """
     # 运行测试用例的目录或文件
     # cases_path = os.path.join(PRO_PATH, "test_case")
-    # cases_path = os.path.join(PRO_PATH, "test_case", "test_001_res_editor_case.py")
-    cases_path = os.path.join(PRO_PATH, "test_case", "test_005_run_record_case.py")
+    cases_path = os.path.join(PRO_PATH, "test_case", "test_001_res_editor_case.py")
+    # cases_path = os.path.join(PRO_PATH, "test_case", "test_005_run_record_case.py")
 
     # 配置浏览器驱动类型(chrome/firefox/chrome-headless/firefox-headless)。
     driver_type = "chrome"
 
     # 配置运行的 URL
-    url = "http://demo14.test.com:4018/datahub"
+    url = "http://demo10.test.com:4018/datahub"
     # url = "http://demo311.test.com:8070/datahub"
 
     # 登录用户名
@@ -25,7 +25,7 @@ class RunConfig:
     password = 'admin0'
 
     # 失败重跑次数
-    rerun = "0"
+    rerun = "1"
 
     # 当达到最大失败数，停止执行
     max_fail = "5"

@@ -38,6 +38,7 @@ class TestResEditorCase:
     # 点击新增资源按钮
     def click_add_res_button(self):
         # 增加try，如果新建资源按钮不能点击，则刷新界面
+        # 相当于一个让测试用例更稳定的做法
         try:
             self.page.add_res_button.click()
         except exceptions.ElementClickInterceptedException:
@@ -182,10 +183,10 @@ class TestResEditorCase:
         self.page.table_tr1_td1.is_displayed()
         assert self.page.table_tr1_td1.text == res_name
 
-    res_type_list = ['mysql', 'oracle', 'sqlserver', 'db2', 'postgresql', 'hana', 'tidb', 'dm', 'ftp', 'sftp', 's3',
-                     'hdfs', 'hive', 'hive_ha', 'hbase']
+    # res_type_list = ['mysql', 'oracle', 'sqlserver', 'db2', 'postgresql', 'hana', 'tidb', 'dm', 'ftp', 'sftp', 's3',
+    #                  'hdfs', 'hive', 'hive_ha', 'hbase']
 
-    # res_type_list = ['mysql']
+    res_type_list = ['mysql', 'oracle', 'sqlserver', 'db2', 'postgresql', 'hana', 'tidb', 'dm']
 
     # @pytest.mark.skip
     @pytest.mark.parametrize('res_type', res_type_list, ids=res_type_list)
@@ -211,7 +212,7 @@ class TestResEditorCase:
             self.add_rds_common(**params)
         self.check_add_success(params['res_name'])
 
-    # @pytest.mark.skip
+    @pytest.mark.skip
     def test_add_res_name_exist(self):
         """
         用例名称：新建资源重名检查
